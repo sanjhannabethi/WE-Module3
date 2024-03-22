@@ -1,3 +1,5 @@
+# Generalized Euler Problem 1
+
 **You:**
 
 do you know about the project euler problem 1?
