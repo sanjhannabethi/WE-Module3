@@ -1,0 +1,102 @@
+\documentclass{article}
+
+% Language setting
+\usepackage[english]{babel}
+
+% Set page size and margins
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{lipsum} 
+
+\title{\textbf{Developing Strategies for the bidding card game ‘Diamonds’ with GenAI}}
+
+\author{\Large Sanjhanna Bethi (Cohort 5)}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+
+'Diamonds', a captivating card game played by a maximum of three players, demands strategic bidding for success. Players strive to win a predetermined number of bids while accumulating points. In a standard 3-player game, each player is assigned one suit other than the diamond suit, but a 2-player game is a special case. The diamond cards are shuffled and put on auction one by one. All the players must bid with one of their cards (i.e. currency) face up. All the bids are uncovered at once. The player with the highest bid, i.e. most points, wins the diamond. If multiple players have the same highest bid, the points from the diamond card are divided equally among them. The player with the most points wins at the end of the game.
+
+\vspace{7pt}
+\section{Problem Statement}
+
+The card game ‘Diamonds’ is all about clever bidding and playing the right cards at the right time. This report aims to aid a Generative AI tool, Gemini, in learning how to play “Diamonds” really well and come up with its own winning strategies to make smart “human-like” decisions when bidding for cards. This involves teaching Gemini the rules of the game, implementing a bidding strategy, and refining the strategy through iterative development. 
+This task is particularly interesting, as this game is something that is not known to the GenAI beforehand. Therefore, to get it to utilize bits of information from different sources and generate ideas would be new in the given context.
+
+\vspace{7pt}
+\section{Methodology}
+\vspace{5pt}
+\subsection{Teaching GenAI the game}
+
+The initial phase involves familiarizing Gemini with the rules and mechanics of the card game. An extremely detailed explanation was given as a prompt, which covered nearly everything I knew about the game, starting with the basic rules, to the exception cases of how to calculate the score in case of a tie, and finally about the declaration of the winner. The game was put forth as a sort of currency system, where the diamonds were described as something of value and the other cards as currency. Surprisingly, Gemini understood most of the rules and sought clarification on specific aspects such as restrictions on card usage and the scoring mechanism.
+\vspace{10pt}
+
+I played a virtual version of ‘Diamonds’ with it, where it kept track of the points and drew random cards for diamonds while playing against me. I made sure that it understood all the rules of the game by giving it feedback through each sample round. Although it kept forgetting some important rules, on iterating upon them, Gemini started to understand the gameplay, and how each bid required careful consideration, as repetition or bids falling outside this range were not permitted.
+\vspace{10pt}
+
+I won the first two bids and Gemini stated the reflections it made from them, saying that I played a calculated risk that paid off. Additionally, it believed that my bidding strategy went beyond just playing the highest card every time; it involved considering the card value, relative hand strength and opponent prediction. (In reality, all I was doing was playing the same bid as the diamond value, as the other players would intuitively either bid a higher or the same value to win the diamond.)
+
+\vspace{7pt}
+\subsection{Strategy Discussed}
+
+The strategies discussed with GenAI aimed at maximizing the AI’s chances of winning diamond cards. This included evaluating the value of each diamond card, managing card resources efficiently, observing bidding patterns, adapting strategies based on opponent behaviour, and prioritizing high-value diamond cards in the late game.
+\vspace{10pt}
+
+With each iteration, strategies were evaluated and enhanced based on feedback and insights gained from previous gameplay experiences. During the iterative process, Gemini made several changes including counting cards to keep track of what had been played and what the opponent had used. Upon asking it for the pseudocode, Gemini provided the following.
+
+\begin{verbatim}
+Initialize game: 
+create_diamond_deck()
+get_player_suit(suits)
+ai_bidding_strategy(diamond, ai_suit, remaining_cards)
+
+play_game():
+    random.shuffle(diamond_deck) 
+    for round in range(1, 14):
+        Reveal diamond
+        For each player: 
+            get_player_bid(suit)
+            get_ai_bid(ai_bidding_strategy)
+        determine_winner(bid1, bid2)
+    Award points to winning bidder(s) based on diamond card value 
+    Update scores 
+    Display round winner(s) and points earned 
+
+play_game()
+Display winner
+\end{verbatim}
+\vspace{5pt}
+\subsection{Code Implementation}
+
+Upon asking an approach for writing a Python code for a two-player game of Diamonds where the computer plays against the user, Gemini generated a basic outline of the code following the above pseudocode. I had to ask it to tweak the code a bit to remove a few extra operations that didn’t seem necessary. After several iterations of explaining the basic language-specific errors it was making, it generated a pretty decent code. 
+\vspace{10pt}
+
+Although the code was working fine, I couldn’t find any of the strategies that Gemini initially recommended in the code. It had just applied a simple adaptive bidding strategy. But there was no sign of opponent observation or strategic bidding. On asking if it could implement the strategy in code, it generated a strategic bidding function, which used the information of past bids as well as adjusted the bids according to game progress. The computer’s bid was made according to the current state of the game rather than just the diamond card that was drawn. In a way, Gemini was now starting to look at the bigger picture.
+\vspace{10pt}
+
+\section{Reflections \& Analysis}
+
+The conversation with the GenAI tool provided valuable insights into its understanding of the game rules and strategies. It highlighted the potential of AI language models to learn complex games and strategies through interactive conversation. However, challenges were encountered in ensuring GenAI’s comprehension of certain concepts, necessitating further clarification and explanation.
+\vspace{10pt}
+
+Gemini was quick to grasp the rules of the game when given detailed information but lacked the reasoning behind the basic language-specific errors, and struggled to solve them. While it first suggested an advanced strategy like opponent observation, its implementation focused on simpler adaptive bidding. After being directed to implement the strategy, Gemini was able to implement and rectify errors accordingly. Future iterations of the code could incorporate more complex bidding strategies and improvements to enhance the gaming experience. 
+
+
+
+\section{Transcripts of the Conversation with Gemini}
+Game Explanation \& Discussion on Strategies - \url{https://g.co/gemini/share/53bb1734f5e1} \\
+Code Generation \& Strategy Implementation - \url{https://g.co/gemini/share/cff18d4a7a33}
+
+\section{Final Code}
+\url{https://colab.research.google.com/drive/1iOGA4MIrcHr2xtctEf9xR26f5-JYJPIE?usp=sharing}
+
+\section{Conclusion \& Path Forward}
+Teaching GenAI to play the ‘Diamonds’ Card Game was a challenging yet rewarding endeavour. The process of refining the code with Gemini highlights its ability to learn and adapt to solve problems. Generative AI proves to be a valuable tool for developing strategies to play a game and implement the code for it and has significant potential in various software development tasks given that it is provided with appropriate and helpful prompts.
+
+
+\end{document}
