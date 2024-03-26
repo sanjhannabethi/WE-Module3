@@ -8,3 +8,4 @@ This repository contains the coursework and code for the Generative AI sessions 
 - [x] Ask the GenAI tool how to approach writing code for a Yahtzee scorer.
 - [x] Instruct the GenAI tool to create a testing strategy for the Yahtzee scorer code. Test it for correctness.
 - [x] Text generation using Markov Chains.
+- [x] Write a technical report/essay on "Developing strategies for the bidding card game 'Diamonds' with GenAI."
